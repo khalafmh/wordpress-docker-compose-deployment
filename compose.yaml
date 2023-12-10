@@ -1,0 +1,28 @@
+services:
+  wordpress:
+    depends_on:
+      - mariadb
+    image: "wordpress:6"
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      WORDPRESS_DB_HOST: "mariadb"
+      WORDPRESS_DB_USER: "wordpress"
+      WORDPRESS_DB_PASSWORD: "gDtA#tdApCrC9eAWpxHRSVrvMNTJhm3p"
+      WORDPRESS_DB_NAME: "wordpress"
+    volumes:
+      - type: "bind"
+        source: "./data/wordpress"
+        target: "/var/www/html"
+  mariadb:
+    image: "mariadb:11"
+    environment:
+      MARIADB_ROOT_PASSWORD: "@kz*7RRvRk*eXiALc*#7WGg7ztw%T$J%"
+      MARIADB_USER: "wordpress"
+      MARIADB_PASSWORD: "gDtA#tdApCrC9eAWpxHRSVrvMNTJhm3p"
+      MARIADB_DATABASE: "wordpress"
+    volumes:
+      - type: "bind"
+        source: "./data/mariadb"
+        target: "/var/lib/mysql"
